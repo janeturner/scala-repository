@@ -2,20 +2,28 @@ import org.mongodb.scala._
 import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.model.Projections._
 import org.mongodb.scala.model.Sorts._
+import org.mongodb.scala.model.Updates._
 
 
 object Mongo {
 
   val mongoCollection = MongoClient().getDatabase("TestDatabase").getCollection("NewCollection")
 
-  def writeMongo() = {
+  def writeMongo(key: String, value: String) = {
 
-    val mongoDocument = Document("""{"key":"value"}""")
+    val mongoDocument = Document(s"""{"$key":"$value"}""")
     mongoCollection.insertOne(mongoDocument).toFutureOption()
   }
 
-  def readMongo() = {
-    val list = mongoCollection.find()
-    println(list)
+  def readMongo(key: String, value: String) = {
+    mongoCollection.find(key, value).printHeadResult().toFutureOption()
+  }
+
+  def deleteMongo(key: String, value: String) = {
+    mongoCollection.deleteOne(equal(key, value)).toFutureOption()
+  }
+
+  def updateMongo(key: String, newKey: String, value: String, newValue: String) = {
+    mongoCollection.updateOne(equal(key, value), set(newKey, newValue)).toFutureOption()
   }
 }
