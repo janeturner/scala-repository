@@ -15,8 +15,8 @@ object Mongo {
     mongoCollection.insertOne(mongoDocument).toFutureOption()
   }
 
-  def readMongo(key: String, value: String) = {
-    mongoCollection.find(key, value).printHeadResult().toFutureOption()
+  def readMongo() = {
+    mongoCollection.find
   }
 
   def deleteMongo(key: String, value: String) = {

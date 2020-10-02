@@ -9,7 +9,7 @@ class MongoTest extends FunSuite {
     }
 
   test("should find all data in collection") {
-    Mongo.readMongo()
+    Mongo.readMongo("","")
     assert(true)
   }
 
