@@ -1,10 +1,13 @@
 import org.scalatest.FunSuite
 
-class HttpTest extends FunSuite {
+class HttpPracticeTest extends FunSuite {
 
   test("should call http") {
-    Http.helloHttp
-    assert(true)
+    assert(HttpPractice.helloHttp == 200)
+  }
+
+  test("should call http GET") {
+    assert(HttpPractice.getHttp == 200)
   }
 
 }
